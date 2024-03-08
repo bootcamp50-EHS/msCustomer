@@ -12,34 +12,39 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerService costumerService;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerService costumerService) {
-        this.costumerService = costumerService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @PostMapping
     public Mono<Customer> crearCustomer(@RequestBody CustomerDTO customerDTO) {
-        return costumerService.createCustomer(customerDTO);
+        return customerService.createCustomer(customerDTO);
     }
 
     @GetMapping("/{id}")
     public Mono<Customer> obtenerCustomer(@PathVariable String id) {
-        return costumerService.findCustomer(id);
+        return customerService.findCustomer(id);
     }
 
     @PutMapping("/{id}")
     public Mono<Customer> actualizarCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
-        return costumerService.updateCustomer(id, customerDTO);
+        return customerService.updateCustomer(id, customerDTO);
     }
 
     @DeleteMapping("/{id}")
     public Mono<Void> eliminarCustomer(@PathVariable String id) {
-        return costumerService.deleteCustomer(id);
+        return customerService.deleteCustomer(id);
     }
 
     @GetMapping
     public Flux<Customer> listarCustomers() {
-        return costumerService.findAllCustomers();
+        return customerService.findAllCustomers();
+    }
+    
+    @GetMapping("/bydocnumber/{docNumber}")
+    public Mono<Customer> getCustomerByDocNumber(@PathVariable("docNumber") String docNumber){
+        return customerService.getCustomerByDocNumber(docNumber);
     }
 }
