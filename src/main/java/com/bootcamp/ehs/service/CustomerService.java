@@ -52,4 +52,8 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public Mono<Customer> getCustomerByDocNumber(String docNumber){
+        return customerRepository.findByDocNumber(docNumber);
+    }
+
 }
