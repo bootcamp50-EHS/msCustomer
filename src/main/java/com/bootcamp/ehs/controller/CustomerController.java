@@ -9,8 +9,9 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/customer")
 public class CustomerController {
+
 
     private final CustomerService customerService;
 
@@ -18,32 +19,32 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Mono<Customer> crearCustomer(@RequestBody CustomerDTO customerDTO) {
         return customerService.createCustomer(customerDTO);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/list/{id}")
     public Mono<Customer> obtenerCustomer(@PathVariable String id) {
         return customerService.findCustomer(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Mono<Customer> actualizarCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
         return customerService.updateCustomer(id, customerDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public Mono<Void> eliminarCustomer(@PathVariable String id) {
         return customerService.deleteCustomer(id);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Flux<Customer> listarCustomers() {
         return customerService.findAllCustomers();
     }
     
-    @GetMapping("/bydocnumber/{docNumber}")
+    @GetMapping("/list/bydocnumber/{docNumber}")
     public Mono<Customer> getCustomerByDocNumber(@PathVariable("docNumber") String docNumber){
         return customerService.getCustomerByDocNumber(docNumber);
     }
