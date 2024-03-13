@@ -10,4 +10,5 @@ public interface CustomerFactory {
 
     Customer create(CustomerDTO customerDTO);
 
+    Customer getCustomer(String customerId);
 }

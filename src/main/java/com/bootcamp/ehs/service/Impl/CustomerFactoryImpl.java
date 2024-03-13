@@ -19,10 +19,16 @@ public class CustomerFactoryImpl implements CustomerFactory {
         if ("Personal".equals(customerDTO.getTypeCustomer())) {
             return new CustomerPerson(customerDTO);
         } else if ("Empresarial".equals(customerDTO.getTypeCustomer())) {
-            //log.info("en CustomerfactoryImpl");
             return new CustomerBusiness(customerDTO);
         } else {
             throw new IllegalArgumentException("Tipo de cliente desconocido: " + customerDTO.getTypeCustomer());
         }
     }
+
+    @Override
+    public Customer getCustomer(String customerId) {
+        return null;
+    }
+
+
 }
